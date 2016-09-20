@@ -1,5 +1,9 @@
 tutum-docker-mongodb
 ====================
+**This image will be deprecated soon. Please use the docker official image:**
+
+https://hub.docker.com/_/mongo/
+
 
 [![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/)
 
@@ -9,7 +13,7 @@ Base docker image to run a MongoDB database server
 MongoDB version
 ---------------
 
-Different versions are built from different folders. If you want to use MongoDB, please check our `tutum/mmongodb` image: https://github.com/tutumcloud/tutum-docker-mongodb
+Different versions are built from different folders. If you want to use MongoDB, please check our `tutum/mongodb` image: https://github.com/tutumcloud/tutum-docker-mongodb
 
 
 Usage
@@ -62,6 +66,22 @@ You can now test your new admin password:
 
         mongo admin -u admin -p mypass
         curl --user admin:mypass --digest http://localhost:28017/
+
+
+Setting a specific user:database
+--------------------------------
+
+If you want to use another database with another user
+
+    docker run -d -p 27017:27017 -p 28017:28017 -e MONGODB_USER="user" -e MONGODB_DATABASE="mydatabase" -e MONGODB_PASS="mypass" tutum/mongodb
+
+You can now test your new credentials:
+
+    mongo mydatabase -u user -p mypass
+
+Note: with mongo 3.x an admin user is also created with the same credentials
+
+    mongo admin -u user -p mypass
 
 Run MongoDB without password
 ----------------------------
